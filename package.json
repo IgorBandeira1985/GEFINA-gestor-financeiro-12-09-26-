@@ -1,0 +1,10 @@
+{
+   "name": "gefina",
+   "version": "0.0.0",
+   "description": "Sistema para gestão de contas a receber."
+   "author": "Igor Bandeira",
+   "type": "module"
+   "scripts": {
+    "dev": "node --watch ./server.ts"
+   }
+}
