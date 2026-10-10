@@ -1,17 +1,74 @@
-import {createServer} from 'node:http';
+import express from 'express';
 
-createServer(function (request, response) {
-    if (request.orl !== '/api/health') {
-        response.writeHead(
-            200,
-            { 'content-type': 'aplication/json'}
-        );
-        response.end(JSON.stringify({ status: 'ok'}));
-        return;
-    }
+const app = express();
 
-    response.writeHead(
-        404, { 'content-type': 'aplication/Json'}
-    );
-    response.end(JSON.stringify({ message: 'Recurso não encontrado'}))
-}).listen(3000);
+type InvoiceStatus = 'pending' | 'paid';
+
+interface Customer {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface Invoice {
+  id: number;
+  amount: number;
+  status: InvoiceStatus;
+  issueDate: string;
+  dueDate: string;
+  customer: Customer;
+}
+
+const invoices: Invoice[] = [{
+  id: 1,
+  amount: 125000,
+  status: 'pending',
+  issueDate: '01-10-2026',
+  dueDate: '03-11-2026',
+  customer: {
+    id: 7,
+    name: 'Construtora Meridiano',
+    email: 'contato@meridiano.com'
+  }
+}, {
+  id: 2,
+  amount: 35000,
+  status: 'paid',
+  issueDate: '02-10-2026',
+  dueDate: '05-11-2026',
+  customer: {
+    id: 7,
+    name: 'Construtora Meridiano',
+    email: 'contato@meridiano.com'
+  }
+}];
+
+app.get('/api/health', (request, response) => {
+  response.status(200).json({ status: 'ok' });
+});
+
+app.get('/api/invoices', (request, response) => {
+  response.status(200).json(invoices);
+});
+
+app.get('/api/invoices/:id', (request, response) => {
+  const id = +request.params.id;
+
+  const invoice = invoices.find(invoice => invoice.id === id);
+
+  if (!invoice) response.status(404).json({ error: {
+    status: 404,
+    message: 'Fatura não encontrada.'
+  }});
+
+  response.status(200).json(invoice);
+});
+
+app.use((request, response) => {
+  response.status(404).json({ error: {
+    status: 404,
+    message: 'Recurso não encontrado.'
+  }});
+});
+
+app.listen(3000);
