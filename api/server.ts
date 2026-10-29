@@ -23,8 +23,8 @@ const invoices: Invoice[] = [{
   id: 1,
   amount: 125000,
   status: 'pending',
-  issueDate: '01-10-2026',
-  dueDate: '03-11-2026',
+  issueDate: '2026-09-25',
+  dueDate: '2026-10-20',
   customer: {
     id: 7,
     name: 'Construtora Meridiano',
@@ -34,12 +34,23 @@ const invoices: Invoice[] = [{
   id: 2,
   amount: 35000,
   status: 'paid',
-  issueDate: '02-10-2026',
-  dueDate: '05-11-2026',
+  issueDate: '2026-10-01',
+  dueDate: '2026-10-30',
   customer: {
-    id: 7,
-    name: 'Construtora Meridiano',
-    email: 'contato@meridiano.com'
+    id: 4,
+    name: 'Gráfica nova',
+    email: 'contato@nova.com.br'
+  }
+}, {
+  id: 3,
+  amount: 35000,
+  status: 'paid',
+  issueDate: '2026-10-01',
+  dueDate: '2026-10-31',
+  customer: {
+    id: 15,
+    name: 'Tendituto',
+    email: 'contato@Tendituto.com'
   }
 }];
 
