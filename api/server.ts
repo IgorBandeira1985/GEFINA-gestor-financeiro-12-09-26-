@@ -54,11 +54,11 @@ const invoices: Invoice[] = [{
   }
 }];
 
-app.get('/api/health', (request, response) => {
+app.get('/api/health', (_request, response) => {
   response.status(200).json({ status: 'ok' });
 });
 
-app.get('/api/invoices', (request, response) => {
+app.get('/api/invoices', (_request, response) => {
   response.status(200).json(invoices);
 });
 

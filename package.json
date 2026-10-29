@@ -1,6 +1,14 @@
- {
+{
  "name": "gefina",
-  "version": "0.0.0",
-  "description": "Sistema para gestão de contas a receber.",
-  "author": "Igor Bandeira",
+ "version": "0.0.0",
+ "description": "Sistema para gestão de contas a receber.",
+ "author": "Igor Bandeira",
+ "scripts": {
+    "check": "biome check ./",
+    "fix": "biome check --write ./",
+    "fix.unsafe": "biome check --write ./"
+ },
+ "devDependencies": {
+  "@biomejs/biome": "2.6.4"
+ }
 }
